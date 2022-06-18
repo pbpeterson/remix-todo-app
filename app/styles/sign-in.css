@@ -1,0 +1,55 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 3rem;
+  max-width: 50rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  width: 100%;
+}
+
+img {
+  max-width: 20rem;
+  margin-top: 1rem;
+  display: block;
+}
+
+.subtitle {
+  margin-top: 1.5rem;
+  font-size: 1.5rem;
+  color: #828282;
+}
+
+p {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  color: #020200;
+}
+
+@media (max-width: 76.8rem) {
+  main {
+    margin-top: 17rem;
+    padding: 0 2rem;
+  }
+
+}
+
+
+@media (max-width: 40.8rem) {
+  img {
+    display: none;
+  }
+}
