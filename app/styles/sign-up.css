@@ -1,0 +1,51 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 3rem;
+  max-width: 50rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #828282;
+}
+
+form {
+  margin-top: 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+input {
+  border: none;
+  padding: 2rem 3rem;
+  border-radius: 3rem;
+  font-weight: 500;
+}
+
+button {
+  width: 100%;
+}
+
+p {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  color: #020200;
+}
+
+
+@media (max-width: 76.8rem) {
+  main {
+    margin-top: 17rem;
+    padding: 0 2rem;
+  }
+}
