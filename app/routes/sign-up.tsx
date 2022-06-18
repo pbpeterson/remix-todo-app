@@ -1,4 +1,5 @@
 import type { LinksFunction } from '@remix-run/node'
+import { Link } from '@remix-run/react'
 import signUpStyles from '~/styles/sign-up.css'
 
 export const links: LinksFunction = () => {
@@ -33,7 +34,10 @@ export default function SignUp() {
           <button type="submit">Register</button>
         </form>
         <p>
-          Already have an account? <strong>Sign in</strong>
+          Already have an account?{' '}
+          <Link to="/sign-in">
+            <strong>Sign in</strong>
+          </Link>
         </p>
       </main>
     </>
