@@ -19,12 +19,19 @@ h2 {
 
 button {
   width: 100%;
+  margin-top: 0rem;
 }
 
 p {
   margin-top: 2rem;
   font-size: 1.5rem;
   color: #020200;
+}
+
+.errorMessage {
+  text-align: center;
+  color: #ff3333;
+  margin-top: .5rem;
 }
 
 
