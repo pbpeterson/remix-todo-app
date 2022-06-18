@@ -1,4 +1,5 @@
 import type { LinksFunction } from '@remix-run/node'
+import { Link } from 'react-router-dom'
 import indexStyles from '~/styles/index.css'
 
 export const links: LinksFunction = () => {
@@ -22,7 +23,9 @@ export default function Index() {
         <p className="secondaryDescription">
           You can use this application to deal with your daily tasks.
         </p>
-        <button>Get Started</button>
+        <Link to={'/sign-in'}>
+          <button>Get Started</button>
+        </Link>
       </main>
     </>
   )
