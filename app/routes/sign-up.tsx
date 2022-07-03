@@ -2,6 +2,7 @@ import type { ActionFunction, LinksFunction } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { Link, useActionData } from '@remix-run/react'
 import signUpStyles from '~/styles/sign-up.css'
+import { validateEmail, validateName, validatePasswords } from '~/validators'
 
 export const links: LinksFunction = () => {
   return [
@@ -10,31 +11,6 @@ export const links: LinksFunction = () => {
       rel: 'stylesheet',
     },
   ]
-}
-
-const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
-
-const validateEmail = (email: string) => {
-  const isValidEmail = emailRegex.test(email as string)
-  if (isValidEmail) {
-    return 'This email does not exist'
-  }
-}
-
-const validateName = (name: string) => {
-  if (name.length < 1) {
-    return 'Your name needs 1 character at minimum'
-  }
-}
-
-const validatePasswords = (password: string, confirmPassword: string) => {
-  if (password !== confirmPassword) {
-    return 'Your password and password confirmation does not match'
-  }
-
-  if (password.length === 0 || confirmPassword.length === 0) {
-    return 'Your password/password confirmation needs 1 character at minimum'
-  }
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -74,7 +50,7 @@ export default function SignUp() {
         <h2>Let's help you meet your tasks</h2>
         <form method="post">
           <input name="name" type="text" placeholder="Enter your full name" />
-          <input type="text" placeholder="Enter your email" />
+          <input type="email" placeholder="Enter your email" name="email" />
           <input
             type="password"
             name="password"

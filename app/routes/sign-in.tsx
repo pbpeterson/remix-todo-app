@@ -1,6 +1,8 @@
-import type { LinksFunction } from '@remix-run/node'
-import { Link } from '@remix-run/react'
+import type { ActionFunction, LinksFunction } from '@remix-run/node'
+import { json } from '@remix-run/node'
+import { Link, useActionData } from '@remix-run/react'
 import signInStyles from '~/styles/sign-in.css'
+import { validateEmail, validatePassword } from '~/validators'
 
 export const links: LinksFunction = () => {
   return [
@@ -11,7 +13,28 @@ export const links: LinksFunction = () => {
   ]
 }
 
+export const action: ActionFunction = async ({ request }) => {
+  const form = await request.formData()
+  const password = form.get('password')
+  const email = form.get('email')
+
+  const fieldErrors = {
+    email: validateEmail(email as string),
+    password: validatePassword(password as string),
+  }
+
+  const hasError = Object.values(fieldErrors).some(Boolean)
+
+  if (hasError) {
+    return json(fieldErrors, {
+      status: 404,
+    })
+  }
+}
+
 export default function SignIn() {
+  const errors = useActionData()
+
   return (
     <>
       <div className="bubbles" />
@@ -22,9 +45,22 @@ export default function SignIn() {
           src="assets/loginIcon.svg"
           alt="Foto de um smartphone com um homem do lado"
         />
-        <form action="POST" autoComplete="off">
-          <input type="email" placeholder="Enter your email" />
-          <input type="password" placeholder="Enter your password" />
+        <form method="POST" autoComplete="off">
+          <input type="text" placeholder="Enter your email" name="email" />
+          <input
+            type="password"
+            placeholder="Enter your password"
+            name="password"
+          />
+          {!!errors && (
+            <div className="errors">
+              {Object.values(errors).map((error, index) => (
+                <p className="errorMessage" key={index}>
+                  ⚠️ {error}
+                </p>
+              ))}
+            </div>
+          )}
           <button type="submit">Login</button>
         </form>
         <p>
