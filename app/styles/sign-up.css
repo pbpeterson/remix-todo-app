@@ -28,13 +28,6 @@ p {
   color: #020200;
 }
 
-.errorMessage {
-  text-align: center;
-  color: #ff3333;
-  margin-top: .5rem;
-}
-
-
 @media (max-width: 76.8rem) {
   main {
     margin-top: 17rem;

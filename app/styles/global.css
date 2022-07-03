@@ -68,7 +68,6 @@ button {
   color: white;
   font-weight: bold;
   padding: 2rem;
-  margin-top: 4rem;
   width: 40rem;
   cursor: pointer;
 }
@@ -92,4 +91,10 @@ input {
   padding: 2rem 3rem;
   border-radius: 3rem;
   font-weight: 500;
+}
+
+.errorMessage {
+  text-align: center;
+  color: #ff3333;
+  margin-top: .5rem;
 }
