@@ -49,7 +49,7 @@ export default function SignUp() {
         <h1>Welcome onboard</h1>
         <h2>Let's help you meet your tasks</h2>
         <form method="post">
-          <input name="name" type="text" placeholder="Enter your full name" />
+          <input name="name" type="text" placeholder="Enter your username" />
           <input type="email" placeholder="Enter your email" name="email" />
           <input
             type="password"
