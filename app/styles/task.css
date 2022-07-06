@@ -1,0 +1,19 @@
+main {
+  max-width: 70rem;
+  margin: 20rem auto 0 auto;
+  text-align: center;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+form {
+ display: flex;
+ flex-direction: row;
+ gap: 1rem
+}
+
+form a {
+  width: 35rem;
+}
