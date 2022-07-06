@@ -1,0 +1,14 @@
+main {
+  max-width: 70rem;
+  margin: 20rem auto 0 auto;
+  text-align: center;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+form {
+  max-width: 40rem;
+  margin: 2rem auto;
+}
