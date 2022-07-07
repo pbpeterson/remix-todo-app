@@ -25,4 +25,5 @@ model Task {
   takesterId String
   taskester User @relation(fields: [takesterId], references: [id], onDelete: Cascade)
   content String
+  done Boolean
 }
