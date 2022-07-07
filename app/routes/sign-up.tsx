@@ -1,7 +1,9 @@
 import type { ActionFunction, LinksFunction } from '@remix-run/node'
+import { redirect } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { Link, useActionData } from '@remix-run/react'
 import signUpStyles from '~/styles/sign-up.css'
+import { CreateNewUser } from '~/utils/session.server'
 import { validateEmail, validateName, validatePasswords } from '~/validators'
 
 export const links: LinksFunction = () => {
@@ -36,7 +38,22 @@ export const action: ActionFunction = async ({ request }) => {
     })
   }
 
-  return null
+  if (hasErrors) return hasErrors
+
+  const errorOnCreateUser = await CreateNewUser({
+    email: email as string,
+    username: name as string,
+    password: password as string,
+  })
+
+  if (errorOnCreateUser)
+    return {
+      error: errorOnCreateUser,
+    }
+
+  return redirect('/sign-in', {
+    status: 200,
+  })
 }
 
 export default function SignUp() {
@@ -49,8 +66,18 @@ export default function SignUp() {
         <h1>Welcome onboard</h1>
         <h2>Let's help you meet your tasks</h2>
         <form method="post">
-          <input name="name" type="text" placeholder="Enter your username" />
-          <input type="email" placeholder="Enter your email" name="email" />
+          <input
+            name="name"
+            type="text"
+            placeholder="Enter your username"
+            defaultValue={''}
+          />
+          <input
+            type="email"
+            placeholder="Enter your email"
+            name="email"
+            defaultValue={''}
+          />
           <input
             type="password"
             name="password"
