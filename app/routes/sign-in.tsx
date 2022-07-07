@@ -2,7 +2,8 @@ import type { ActionFunction, LinksFunction } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { Link, useActionData } from '@remix-run/react'
 import signInStyles from '~/styles/sign-in.css'
-import { validateEmail, validatePassword } from '~/validators'
+import { createUserSession, Login } from '~/utils/session.server'
+import { validateName, validatePassword } from '~/validators'
 
 export const links: LinksFunction = () => {
   return [
@@ -15,11 +16,11 @@ export const links: LinksFunction = () => {
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData()
-  const password = form.get('password')
-  const email = form.get('email')
+  const password = form.get('password') as string
+  const username = form.get('username') as string
 
   const fieldErrors = {
-    email: validateEmail(email as string),
+    username: validateName(username as string),
     password: validatePassword(password as string),
   }
 
@@ -30,6 +31,15 @@ export const action: ActionFunction = async ({ request }) => {
       status: 404,
     })
   }
+
+  const user = await Login({
+    password,
+    username,
+  })
+
+  if (!user) return `Username/Password combination is incorrect`
+
+  return createUserSession(user.id, '/tasks')
 }
 
 export default function SignIn() {
@@ -46,7 +56,11 @@ export default function SignIn() {
           alt="Foto de um smartphone com um homem do lado"
         />
         <form method="POST" autoComplete="off">
-          <input type="text" placeholder="Enter your email" name="email" />
+          <input
+            type="text"
+            placeholder="Enter your username"
+            name="username"
+          />
           <input
             type="password"
             placeholder="Enter your password"
