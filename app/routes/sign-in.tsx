@@ -37,7 +37,10 @@ export const action: ActionFunction = async ({ request }) => {
     username,
   })
 
-  if (!user) return `Username/Password combination is incorrect`
+  if (!user)
+    return {
+      loginError: `Username/Password combination is incorrect`,
+    }
 
   return createUserSession(user.id, '/tasks')
 }

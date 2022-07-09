@@ -46,14 +46,13 @@ export const action: ActionFunction = async ({ request }) => {
     password: password as string,
   })
 
-  if (errorOnCreateUser)
+  if (errorOnCreateUser) {
     return {
       error: errorOnCreateUser,
     }
+  }
 
-  return redirect('/sign-in', {
-    status: 200,
-  })
+  return redirect('/sign-in')
 }
 
 export default function SignUp() {

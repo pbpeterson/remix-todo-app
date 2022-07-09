@@ -26,7 +26,18 @@ export const links: LinksFunction = () => {
 export const action: ActionFunction = async ({ request, params }) => {
   const formData = await request.formData()
   const inputTask = formData.get('taskEdition')
+  const action = formData.get('action')
   const taskId = params.taskId
+
+  if (action === 'delete') {
+    await db.task.delete({
+      where: {
+        id: taskId,
+      },
+    })
+
+    return redirect(`/tasks`)
+  }
 
   await db.task.update({
     data: {
@@ -36,11 +47,12 @@ export const action: ActionFunction = async ({ request, params }) => {
       id: taskId,
     },
   })
+
   return redirect(`/task/${taskId}`)
 }
 
 export const loader: LoaderFunction = async (request) => {
-  const taskId = request.params.task
+  const taskId = request.params.taskId
   const task = await db.task.findFirst({
     where: {
       id: taskId,
@@ -61,8 +73,16 @@ const Task = () => {
         </h2>
         <form method="post">
           <input defaultValue={task.content} type="text" name="taskEdition" />
-          <button type="submit" value={'finishTask'}>
+          <button type="submit" value="finishTask" name="action">
             Finish task
+          </button>
+          <button
+            className="deleteButton"
+            value="delete"
+            type="submit"
+            name="action"
+          >
+            Delete task
           </button>
         </form>
       </main>

@@ -8,10 +8,11 @@ import { Link } from 'react-router-dom'
 import taskStyle from '~/styles/task.css'
 import { db } from '~/utils/db.server'
 
-type TaskParams = {
+export type TaskParams = {
   content: string
   createdAt: string
   id: string
+  done: boolean
 }
 
 export const links: LinksFunction = () => {
@@ -23,8 +24,16 @@ export const links: LinksFunction = () => {
   ]
 }
 
-export const action: ActionFunction = ({ request }) => {
-  // console.log(request)
+export const action: ActionFunction = async ({ params }) => {
+  await db.task.update({
+    where: {
+      id: params.task,
+    },
+    data: {
+      done: true,
+    },
+  })
+
   return null
 }
 
@@ -46,7 +55,8 @@ const Task = () => {
       <div></div>
       <main>
         <h2>
-          Your current task is: <strong>{task.content}</strong>
+          Your current task is:{' '}
+          <strong className={task.done ? 'done' : ''}>{task.content}</strong>
         </h2>
         <form method="post">
           <button type="submit" value={'finishTask'}>
@@ -56,6 +66,9 @@ const Task = () => {
             <button type="submit">Edit task</button>
           </Link>
         </form>
+        <Link to="/tasks">
+          <p className="backButton">Back to task list</p>
+        </Link>
       </main>
     </div>
   )
