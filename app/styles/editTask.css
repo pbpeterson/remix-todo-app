@@ -12,3 +12,7 @@ form {
   max-width: 40rem;
   margin: 2rem auto;
 }
+
+.deleteButton {
+  background: #d11a2a;
+}

@@ -1,0 +1,49 @@
+main {
+  max-width: 40rem;
+  margin: 20rem auto 0 auto;
+}
+
+h2 {
+  text-align: center;
+  font-size: 3rem;
+}
+
+li {
+ list-style: none;
+}
+
+button {
+  margin: 0 auto;
+}
+
+.taskList {
+  margin-top: 2rem;
+}
+
+.newTask {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.taskList li {
+  font-size: 2rem;
+  color: #AD491E;
+}
+
+.taskList li::after {
+  content: '🡒';
+  margin-left: 1rem;
+  display: inline-block;
+  animation: slideArrow .5s infinite;
+}
+
+@keyframes slideArrow {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(2rem);
+  }
+}

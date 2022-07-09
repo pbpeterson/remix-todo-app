@@ -17,3 +17,32 @@ form {
 form a {
   width: 35rem;
 }
+
+.done {
+  text-decoration: line-through;
+  color: #a0a0a0;
+}
+
+.backButton {
+  margin-top: 3rem;
+  font-size: 2rem;
+  color: #AD491E;
+}
+
+.backButton::before {
+  content: '←';
+  margin-left: 1rem;
+  display: inline-block;
+  animation: slideArrow .5s infinite;
+}
+
+
+@keyframes slideArrow {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-2rem);
+  }
+}
